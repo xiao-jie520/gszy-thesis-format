@@ -145,7 +145,7 @@ Q_current < Q_safe
     └── reference-template.docx       # 学院原始规范文件
 ```
 
-顶层 `SKILL.md` 用 WorkBuddy / Claude 的 Skill 机制组织，因此整个仓库也可直接放进 `~/.workbuddy/skills/` 或 `~/.claude/skills/` 作为技能使用；不用 Skill 机制时，直接调 `scripts/` 里的两个脚本即可。
+顶层 `SKILL.md` 用 Claude 的 Skill 机制组织，因此整个仓库也可直接放进 `~/.claude/skills/` 作为技能使用；不用 Skill 机制时，直接调 `scripts/` 里的两个脚本即可。
 
 ## 已知限制
 
