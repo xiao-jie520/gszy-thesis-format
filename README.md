@@ -37,6 +37,24 @@ python scripts/check_thesis.py 我的论文.docx -o 检查报告.md
 
 生成后打开 Word，按 `Ctrl+A` → `F9` 更新域（目录由域生成，不更新只显示占位文字）。
 
+## 安装成技能（可选）
+
+不装成技能也能用，直接调 `scripts/` 里的脚本即可。想让 AI 助手自动识别"帮我排版论文"这类请求，就把它装进对应 harness 的用户级技能目录：
+
+```bash
+python scripts/install_skill.py --list        # 先看会装到哪
+python scripts/install_skill.py               # 装到检测到的 harness
+python scripts/install_skill.py --targets claude,dsh
+```
+
+| target | 目录 | 说明 |
+| --- | --- | --- |
+| `workbuddy` | `~/.workbuddy/skills/gszy-thesis-format/` | WorkBuddy |
+| `claude` | `~/.claude/skills/gszy-thesis-format/` | Claude Code |
+| `dsh` | `~/.dsh/skills/gszy-thesis-format/` | DeepSeek Harness |
+
+脚本会剥掉 Claude Code / DSH 不接受的 `agent_created` 字段（Claude Code 里它被静默忽略，但上传到 claude.ai 或走 Skills API 时会硬报错），WorkBuddy 副本则保留 —— 它需要这个标记才允许后续修改技能。
+
 ## 稿件怎么写
 
 ````markdown
@@ -135,7 +153,8 @@ Q_current < Q_safe
 ├── SKILL.md                          # 技能说明（WorkBuddy / Claude Skill 入口）
 ├── scripts/
 │   ├── build_thesis.py               # 稿件 → 规范 .docx
-│   └── check_thesis.py               # .docx → 检查报告
+│   ├── check_thesis.py               # .docx → 检查报告
+│   └── install_skill.py              # 装到 WorkBuddy / Claude Code / DSH
 ├── references/
 │   ├── format-spec.md                # 完整规范条文与常见错误
 │   └── manuscript-syntax.md          # 稿件语法
